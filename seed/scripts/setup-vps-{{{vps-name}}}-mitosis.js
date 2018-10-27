@@ -1,6 +1,6 @@
 const loadRootDNA = require('../cells/node_modules/lib/load-root-dna')
 module.exports = function (angel) {
-  angel.on('setup {{{vps-name}}} mitosis', async function () {
+  angel.on('setup vps {{{vps-name}}} mitosis', async function () {
     let rootDNA = await loadRootDNA()
     let vpsIP = rootDNA.vps['{{{vps-name}}}'].ip
     await angel.exec(`ssh root@${vpsIP} '${[
@@ -13,5 +13,6 @@ module.exports = function (angel) {
     ].join(' && ')}'`)
     await angel.exec('npx organic-nginx-configurator ' + vpsIP)
     await angel.exec('npx organic-systemd-configurator ' + vpsIP)
+    await angel.exec(`ssh-copy-id node@${vpsIP}`)
   })
 }
