@@ -1,0 +1,15 @@
+{
+  "mitosis": {
+    "{{{mitosis-name}}}": {
+      "name": "{{{mitosis-name}}}",
+      "target": "@vps.{{{vps-name}}}",
+      "mode": "{{{cell-mode}}}",
+      "aptosis": {
+        "versionConditions": ["major", "minor", "patch", "pre-release", "build"]
+      },
+      "zygote": {{{zygote}}},
+      "count": {{{count}}},
+      "notifyChannels": {{{notify-channels}}}
+    }
+  }
+}

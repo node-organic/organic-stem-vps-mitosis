@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "organic-nginx-configurator": "node-organic/organic-nginx-configurator",
+    "organic-systemd-configurator": "node-organic/organic-systemd-configurator",
+    "angelabilities-exec": "^1.0.0"
+  }
+}
