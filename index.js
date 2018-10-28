@@ -18,7 +18,7 @@ const execute = async function ({destDir = process.cwd(), answers} = {}) {
   if (!resulted_answers['cwd']) {
     resulted_answers['cwd'] = await stack.ask(`cwd? (relative to ${destDir}/cells/)`, resulted_answers['cell-name'])
   }
-  resulted_answers['cdp'] = path.resolve(resulted_answers['cwd'], '../')
+  resulted_answers['cdp'] = path.dirname(resulted_answers['cwd'])
   if (!resulted_answers['zygote']) {
     resulted_answers['zygote'] = await stack.ask('zygote? (true for static webapps)', 'true')
   }
@@ -34,7 +34,7 @@ const execute = async function ({destDir = process.cwd(), answers} = {}) {
     if (resulted_answers['zygote'] === 'true') {
       defaultChannels = 'nginx'
     }
-    resulted_answers['notify-channels'] = (await stack.ask('notify-channels? (comma separated)', defaultChannels)).split(',')
+    resulted_answers['notify-channels'] = (await stack.ask('notify-channels? (comma separated)', defaultChannels)).split(',').map((v) => v.trim())
   }
   resulted_answers = await stack.configure({
     sourceDirs: [path.join(__dirname, 'seed')],
