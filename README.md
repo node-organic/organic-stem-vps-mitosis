@@ -1,4 +1,4 @@
-# organic-stem-vps-mitosis
+# organic-stem-vps-mitosis-template
 
 A stack upgrade adding mitosis abilities to a stem skeleton 2.1 monorepo based cell
 
@@ -6,7 +6,7 @@ A stack upgrade adding mitosis abilities to a stem skeleton 2.1 monorepo based c
 
 ```
 $ cd ./myProject
-$ npx node-organic/organic-stem-vps-mitosis
+$ npx node-organic/organic-stem-vps-mitosis-template
 ```
 
 ## details
@@ -23,4 +23,4 @@ $ npx node-organic/organic-stem-vps-mitosis
 
 * `angel start remote mitosis :mitosisName` starts (packages and uploads) a mitosis on a host vps target then completes the mitosis process by notifying `nginx` and `systemd` root cells
 
-* `angel start remote aptosis :mitosisName` starts an aptosis on previously started mitosis on a host vps target by notifying `nginx` and `systemd` root cells
+* `angel start remote aptosis :mitosisName` starts an aptosis on previously started mitosis on a host vps target by notifying `nginx` and `systemd` root cells.

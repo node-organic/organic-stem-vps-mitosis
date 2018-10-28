@@ -1,9 +1,9 @@
 {
-  "name": "organic-stem-vps-mitosis",
+  "name": "organic-stem-vps-mitosis-template",
   "description": "A stack upgrade to add mitosis(deployment) abilities to a stem skeleton 2.1 monorepo",
   "version": "2.1.0",
   "bin": {
-    "organic-stem-vps-mitosis": "./index.js"
+    "organic-stem-vps-mitosis-template": "./index.js"
   },
   "scripts": {
     "test": "jest"
@@ -34,12 +34,12 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/node-organic/organic-stem-vps-mitosis.git"
+    "url": "git+https://github.com/node-organic/organic-stem-vps-mitosis-template.git"
   },
   "author": "Boris Filipov",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/node-organic/organic-stem-vps-mitosis/issues"
+    "url": "https://github.com/node-organic/organic-stem-vps-mitosis-template/issues"
   },
-  "homepage": "https://github.com/node-organic/organic-stem-vps-mitosis#readme"
+  "homepage": "https://github.com/node-organic/organic-stem-vps-mitosis-template#readme"
 }
