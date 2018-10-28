@@ -30,9 +30,9 @@ const execute = async function ({destDir = process.cwd(), answers} = {}) {
     }
   }
   if (!resulted_answers['notify-channels']) {
-    let defaultChannels = ['nginx', 'systemd']
+    let defaultChannels = 'nginx, systemd'
     if (resulted_answers['zygote'] === 'true') {
-      defaultChannels = ['nginx']
+      defaultChannels = 'nginx'
     }
     resulted_answers['notify-channels'] = (await stack.ask('notify-channels? (comma separated)', defaultChannels)).split(',')
   }
