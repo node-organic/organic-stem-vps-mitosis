@@ -34,7 +34,7 @@ test('stack upgrade', async () => {
       'cwd': 'crons/testcell',
       'vps-name': 'prod',
       'vps-ip': '127.0.0.1',
-      'cell-domain': 'domain.com',
+      'vps-domain': 'domain.com',
       'zygote': 'false',
       'count': 2,
       'notify-channels': ['nginx', 'systemd'],

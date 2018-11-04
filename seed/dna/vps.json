@@ -1,6 +1,0 @@
-{
-  "{{{vps-name}}}": {
-    "hostname": "{{{vps-name}}}",
-    "ip": "{{{vps-ip}}}"
-  }
-}

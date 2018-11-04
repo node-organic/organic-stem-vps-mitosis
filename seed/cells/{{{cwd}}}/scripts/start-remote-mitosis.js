@@ -1,50 +1,65 @@
 const loadCellInfo = require('lib/load-cell-info')
-const path = require('path')
-
+const getGitBranchName = require('git-branch-name')
+const List = require('prompt-list')
+const getBranchName = function () {
+  return new Promise((resolve, reject) => {
+    getGitBranchName(require('repo-full-path'), (err, branchName) => {
+      if (err) return reject(err)
+      resolve(branchName)
+    })
+  })
+}
+const doPromise = function (angel, cmdInput) {
+  return new Promise((resolve, reject) => {
+    angel.do(cmdInput, (err) => {
+      if (err) return reject(err)
+      resolve()
+    })
+  })
+}
 module.exports = function (angel) {
   angel.on('start remote mitosis :mitosisName', async function (angel) {
+    let list = new List({
+      name: 'versionChange',
+      message: 'version change?',
+      choices: [ 'major', 'minor', 'patch', 'prerelease', 'none' ]
+    })
+    let versionChange = await list.run()
+    if (versionChange === 'prerelease') {
+      versionChange = 'prerelease --preid=' + (await getBranchName())
+    }
+    if (versionChange !== 'none') {
+      await angel.exec([
+        `npm version ${versionChange}`,
+        `git push --tags`
+      ].join(' && '))
+    }
     let cellInfo = await loadCellInfo('{{{cell-name}}}')
     let packagejson = require('../package.json')
     let mitosis = cellInfo.dna.mitosis[angel.cmdData.mitosisName]
-    let commonCodePaths = [
-      'cells/node_modules',
-      'dna'
-    ].map((relativePath) => {
-      return path.join(require('full-repo-path'), relativePath)
-    })
-    let srcPaths = [ process.cwd() ].concat(commonCodePaths)
-    let packPath = `./archived/${packagejson.version}`
+    let packPath = `./${cellInfo.cwd}/archived`
     let cellMode = mitosis.mode
-    let remoteDistPath = `./deployments/cells/{{{cell-name}}}/${packagejson.version}-${cellMode}`
-    if (packagejson.scripts.build) {
-      await angel.exec(`CELL_MODE=${cellMode} npm run build`)
-      srcPaths = [ path.join(process.cwd(), './dist/') ]
-    }
-    let bundleCmd = [
-      `mkdir -p ./${packPath}`,
-      `tar ${[
-        `--exclude='.git*'`,
-        `--exclude='dist*'`,
-        `--exclude='archived*'`,
-        `--exclude='./node_modules*'`,
-        `--exclude='coverage*'`,
-        `--exclude='__tests__*'`
-      ].join(' ')} -zcvf ${packPath}.tar.gz ${srcPaths.join(' ')}`
-    ].join(' && ')
-    if (process.env.DRY || angel.dry) {
-      console.info(bundleCmd)
-    } else {
-      await angel.exec(bundleCmd)
-    }
+    let remoteDistPath = `~/deployments/cells/{{{cell-name}}}/${packagejson.version}-${cellMode}`
+    console.info('packing...')
+    await doPromise(angel, 'pack')
+    console.info('pack complete, uploading & complete mitosis...')
     let deployCmd = [
-      `scp ${packPath} ${mitosis.target.ip}:${remoteDistPath}/deployment.tar.gz`,
-      `ssh ${mitosis.target.ip} '${[
+      `cd ${require('lib/full-repo-path')}`,
+      `ssh node@${mitosis.target.ip} '${[
+        `mkdir -p ${remoteDistPath}`,
+      ].join(' && ')}'`,
+      `scp ${packPath}/${packagejson.version}.tar.gz node@${mitosis.target.ip}:${remoteDistPath}/deployment.tar.gz`,
+      `ssh node@${mitosis.target.ip} '${[
         `cd ${remoteDistPath}`,
         'tar -zxf deployment.tar.gz',
         '. ~/.nvm/nvm.sh',
+        `nvm install ${packagejson.engines.node}`,
         `nvm use ${packagejson.engines.node}`,
-        'npm i',
-        `npx angel complete mitosis ${mitosis.target.name}`
+        `cd ${remoteDistPath}`,
+        `npm i --production`,
+        `cd ${remoteDistPath}/${cellInfo.cwd}`,
+        'npm i --production',
+        `npx angel complete mitosis ${mitosis.name}`
       ].join(' && ')}'`
     ].join(' && ')
     if (process.env.DRY || angel.dry) {

@@ -1,0 +1,5 @@
+{
+  "name": "{{{vps-name}}}",
+  "ip": "{{{vps-ip}}}",
+  "domain": "{{{vps-domain}}}"
+}

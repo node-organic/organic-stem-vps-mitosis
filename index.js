@@ -20,7 +20,7 @@ const execute = async function ({destDir = process.cwd(), answers} = {}) {
   }
   resulted_answers['cdp'] = path.dirname(resulted_answers['cwd'])
   if (!resulted_answers['zygote']) {
-    resulted_answers['zygote'] = await stack.ask('zygote? (true for static webapps)', 'true')
+    resulted_answers['zygote'] = await stack.ask('zygote? (true for static webapps)', 'false')
   }
   if (resulted_answers['zygote'] === 'true') {
     resulted_answers['count'] = 1

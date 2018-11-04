@@ -1,5 +1,7 @@
 {
   "scripts": {
+    "deploy-{{{mitosis-name}}}": "angel start remote mitosis {{{mitosis-name}}}",
+    "stop-{{{mitosis-name}}}": "angel start remote apoptosis {{{mitosis-name}}}"
   },
   "dependencies": {
     "organic-angel": "^0.3.2",
@@ -7,5 +9,10 @@
     "organic-plasma-channel": "^2.1.1",
     "angelabilities-package-scripts": "^0.1.0",
     "angelabilities-exec": "^1.0.0"
+  },
+  "devDependencies": {
+    "angelscripts-help": "^0.2.0",
+    "prompt-list": "^3.2.0",
+    "git-branch-name": "^1.1.0"
   }
 }

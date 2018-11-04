@@ -4,8 +4,8 @@
       "name": "{{{mitosis-name}}}",
       "target": "@vps.{{{vps-name}}}",
       "mode": "{{{cell-mode}}}",
-      "aptosis": {
-        "versionConditions": ["major", "minor", "patch", "pre-release", "build"]
+      "apoptosis": {
+        "versionConditions": ["major", "minor", "patch", "prerelease", "build"]
       },
       "zygote": {{{zygote}}},
       "count": {{{count}}},

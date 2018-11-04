@@ -11,16 +11,16 @@ $ npx node-organic/organic-stem-vps-mitosis-template
 
 ## details
 
-### on monorepo level 
+### monorepo level 
 
-* `angel setup vps :vpsName mitosis` script which provisions remote VPS instance
+* `$ npx angel vps :vpsName setup` script which provisions remote VPS instance
   * installs [organic-nginx-configurator](https://github.com/node-organic/organic-nginx-configurator) and [organic-systemd-configurator](https://github.com/node-organic/organic-systemd-configurator)
   * setups `node` user with [nvm](https://github.com/creationix/nvm) at `/home/node/.nvm`
 
-### on cell level 
+### cell level 
 
-* `angel deploy :version` script which deploys a version (`major`, `minor`, `patch`, `prerelease` or `build`) accordingly to its cell mitosis dna
+* `$ npx angel deploy :version` script which deploys a version (`major`, `minor`, `patch`, `prerelease`, `build` or `current`) accordingly to its cell mitosis dna
 
-* `angel start remote mitosis :mitosisName` starts (packages and uploads) a mitosis on a host vps target then completes the mitosis process by notifying `nginx` and `systemd` root cells
+* `$ npx angel status report` generates report about cell mitosis(es) accordingly to its dna
 
-* `angel start remote aptosis :mitosisName` starts an aptosis on previously started mitosis on a host vps target by notifying `nginx` and `systemd` root cells.
+* `$ npx angel kill :version` script which kills specific completed mitosis by its version

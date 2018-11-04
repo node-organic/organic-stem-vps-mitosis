@@ -1,7 +1,7 @@
 const loadRootDNA = require('lib/load-root-dna')
 const loadCellInfo = require('lib/load-cell-info')
 const Plasma = require('organic-plasma')
-const Channel = require('organic-plasma-channel')
+const buildChannel = require('organic-plasma-channel')
 
 module.exports = function (angel) {
   angel.on('complete mitosis :mitosisName', async (angel) => {
@@ -20,7 +20,7 @@ module.exports = function (angel) {
         endpoint: 'http://localhost:' + port,
         port: port,
         mountpoint: rootDNA['cell-mountpoints'][cellInfo.name],
-        domain: rootDNA['cell-domains'][cellInfo.name],
+        domain: mitosis.target.domain,
         mitosis: mitosis
       }
     }
@@ -29,12 +29,13 @@ module.exports = function (angel) {
     }
     let notifyChannels = mitosis.notifyChannels
     notifyChannels.forEach((channelName) => {
+      console.info('notify ' + channelName + ' ...')
       let plasma = new Plasma()
-      let channel = new Channel(plasma, Object.assign({
+      buildChannel(plasma, Object.assign({
         'channelName': channelName,
         'swarmOpts': {
           'utp': false,
-          'tcp': false,
+          'tcp': true,
           'dns': true,
           'dht': false
         },
@@ -43,8 +44,9 @@ module.exports = function (angel) {
       plasma.on('channelReady', () => {
         plasma.emit(Object.assign({
           type: 'control',
-          channel: channel.dna.channelName
+          channel: channelName
         }, mitosisChemical), () => {
+          console.info(channelName + ' acknowledged.')
           plasma.emit('kill')
         })
       })

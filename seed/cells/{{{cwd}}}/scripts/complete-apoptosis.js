@@ -1,14 +1,14 @@
 const loadCellInfo = require('lib/load-cell-info')
 const Plasma = require('organic-plasma')
-const Channel = require('organic-plasma-channel')
+const buildChannel = require('organic-plasma-channel')
 
 module.exports = function (angel) {
-  angel.on('complete apoptosis :mitosisName', async function () {
+  angel.on('complete apoptosis :mitosisName', async function (angel) {
     let cellInfo = await loadCellInfo('{{{cell-name}}}')
     let packagejson = require('../package.json')
     let mitosis = cellInfo.dna.mitosis[angel.cmdData.mitosisName]
-    let aptosisChemical = {
-      action: 'onCellAptosisComplete',
+    let apoptosisChemical = {
+      action: 'onCellApoptosisComplete',
       cellInfo: {
         name: cellInfo.name,
         cwd: process.cwd(),
@@ -17,24 +17,26 @@ module.exports = function (angel) {
         mitosis: mitosis
       }
     }
-    let notifyChannels = cellInfo.dna.mitosis.notify
+    let notifyChannels = mitosis.notifyChannels
     notifyChannels.forEach((channelName) => {
       let plasma = new Plasma()
-      let channel = new Channel(plasma, Object.assign({
+      buildChannel(plasma, Object.assign({
         'channelName': channelName,
         'swarmOpts': {
           'utp': false,
-          'tcp': false,
+          'tcp': true,
           'dns': true,
           'dht': false
         },
         'emitReady': 'channelReady'
       }, mitosis.broadcastChannelDNA))
       plasma.on('channelReady', () => {
+        console.info('notify ' + channelName + ' ...')
         plasma.emit(Object.assign({
           type: 'control',
-          channel: channel.dna.channelName
-        }, aptosisChemical), () => {
+          channel: channelName
+        }, apoptosisChemical), () => {
+          console.info(channelName + ' acknowledged.')
           plasma.emit('kill')
         })
       })
