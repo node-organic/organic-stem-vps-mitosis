@@ -9,8 +9,7 @@
       },
       "zygote": {{{zygote}}},
       "count": {{{count}}},
-      "notifyChannels": {{{notify-channels}}},
-      "includeSecrets": {{{includeSecrets}}}
+      "notifyChannels": {{{notify-channels}}}
     }
   }
 }

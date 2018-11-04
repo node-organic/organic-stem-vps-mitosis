@@ -21,17 +21,19 @@ module.exports = function (angel) {
     ].join(' && ')}'`
     console.info(setupCmds)
     await angel.exec(setupCmds)
-    console.info('installing root cells...')
-    await angel.exec('npx node-organic/organic-nginx-configurator ' + vpsIP + ' ./dna/vps/{{{vps-name}}}/nginx.conf.ejs')
-    await angel.exec('npx node-organic/organic-systemd-configurator ' + vpsIP + ' ./dna/vps/{{{vps-name}}}/systemd.service.ejs')
+    console.info('installing root cell node-organic/organic-nginx-configurator...')
+    await angel.exec('npx node-organic/organic-nginx-configurator ' + vpsIP + ' ./dna/vps/v9/nginx.conf.ejs')
+    console.info('installing root cell node-organic/organic-systemd-configurator...')
+    await angel.exec('npx node-organic/organic-systemd-configurator ' + vpsIP + ' ./dna/vps/v9/systemd.service.ejs')
     console.info('{{{vps-name}}} vps setup done.')
   })
   angel.on('vps {{{vps-name}}} update services', async () => {
     let rootDNA = await loadRootDNA()
     let vpsIP = rootDNA.vps['{{{vps-name}}}'].ip
-    console.info('updating root cells...')
-    await angel.exec('npx node-organic/organic-nginx-configurator ' + vpsIP + ' ./dna/vps/{{{vps-name}}}/nginx.conf.ejs')
-    await angel.exec('npx node-organic/organic-systemd-configurator ' + vpsIP + ' ./dna/vps/{{{vps-name}}}/systemd.service.ejs')
+    console.info('updating root cell node-organic/organic-nginx-configurator...')
+    await angel.exec('npx node-organic/organic-nginx-configurator ' + vpsIP + ' ./dna/vps/v9/nginx.conf.ejs')
+    console.info('updating root cell node-organic/organic-systemd-configurator...')
+    await angel.exec('npx node-organic/organic-systemd-configurator ' + vpsIP + ' ./dna/vps/v9/systemd.service.ejs')
   })
   angel.on('vps {{{vps-name}}} restart services', async () => {
     let rootDNA = await loadRootDNA()

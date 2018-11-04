@@ -2,7 +2,7 @@ const loadCellInfo = require('lib/load-cell-info')
 const path = require('path')
 
 module.exports = function (angel) {
-  angel.on('pack', async (angel, done) => {
+  angel.on('pack :mitosisName', async (angel, done) => {
     let cellInfo = await loadCellInfo('{{{cell-name}}}')
     let packagejson = require('../package.json')
     let mitosis = cellInfo.dna.mitosis[angel.cmdData.mitosisName]
@@ -21,8 +21,7 @@ module.exports = function (angel) {
     let bundleCmd = [
       `cd ${require('lib/full-repo-path')}`,
       `mkdir -p ${packPath}`,
-      `git archive --output ${packPath}/${packagejson.version}.zip ${srcPaths.join(' ')}`,
-      mitosis.includeSecrets ? `zip -u ${packPath}/${packagejson.version}.zip ./dna/${cellMode}/secrets.json` : ''
+      `git archive --output ${packPath}/${packagejson.version}.tar.gz HEAD ${srcPaths.join(' ')}`
     ].filter(v => v).join(' && ')
     if (process.env.DRY || angel.dry) {
       console.info(bundleCmd)
