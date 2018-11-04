@@ -18,6 +18,9 @@ const execute = async function ({destDir = process.cwd(), answers} = {}) {
   if (!resulted_answers['cwd']) {
     resulted_answers['cwd'] = await stack.ask(`cwd? (relative to ${destDir}/cells/)`, resulted_answers['cell-name'])
   }
+  if (!resulted_answers['includeSecrets']) {
+    resulted_answers['includeSecrets'] = await stack.ask(`includeSecrets? (true for /dna/:cellMode/secrets.json)`, 'true')
+  }
   resulted_answers['cdp'] = path.dirname(resulted_answers['cwd'])
   if (!resulted_answers['zygote']) {
     resulted_answers['zygote'] = await stack.ask('zygote? (true for static webapps)', 'false')
@@ -50,11 +53,6 @@ const execute = async function ({destDir = process.cwd(), answers} = {}) {
   await stack.exec(`npx angel repo cell ${cellName} -- npm install`)
   console.info('run npm install...')
   await stack.exec('npm install')
-  if (!resulted_answers['disable-vps-setup']) {
-    if (await stack.ask(`setup ${resulted_answers['vps-name']} for mitosis?`, 'yes') === 'yes') {
-      await stack.exec(`npx angel setup vps ${resulted_answers['vps-name']} mitosis`)
-    }
-  }
 }
 
 if (module.parent) {

@@ -40,7 +40,7 @@ test('stack upgrade', async () => {
       'notify-channels': ['nginx', 'systemd'],
       'mitosis-name': 'prod',
       'cell-mode': '_production',
-      'disable-vps-setup': true
+      'includeSecrets': 'true'
     }
   })
 })

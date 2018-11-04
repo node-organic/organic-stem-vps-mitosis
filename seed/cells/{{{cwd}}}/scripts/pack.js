@@ -21,19 +21,14 @@ module.exports = function (angel) {
     let bundleCmd = [
       `cd ${require('lib/full-repo-path')}`,
       `mkdir -p ${packPath}`,
-      `tar ${[
-        `--exclude='.git*'`,
-        `--exclude='dist*'`,
-        `--exclude='archived*'`,
-        `--exclude='${cellInfo.cwd}/node_modules*'`,
-        `--exclude='coverage*'`,
-        `--exclude='__tests__*'`
-      ].join(' ')} -zcvf ${packPath}/${packagejson.version}.tar.gz ${srcPaths.join(' ')}`
-    ].join(' && ')
+      `git archive --output ${packPath}/${packagejson.version}.zip ${srcPaths.join(' ')}`,
+      mitosis.includeSecrets ? `zip -u ${packPath}/${packagejson.version}.zip ./dna/${cellMode}/secrets.json` : ''
+    ].filter(v => v).join(' && ')
     if (process.env.DRY || angel.dry) {
       console.info(bundleCmd)
     } else {
       await angel.exec(bundleCmd)
     }
+    done && done()
   })
 }

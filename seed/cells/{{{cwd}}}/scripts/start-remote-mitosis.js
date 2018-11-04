@@ -48,10 +48,10 @@ module.exports = function (angel) {
       `ssh node@${mitosis.target.ip} '${[
         `mkdir -p ${remoteDistPath}`,
       ].join(' && ')}'`,
-      `scp ${packPath}/${packagejson.version}.tar.gz node@${mitosis.target.ip}:${remoteDistPath}/deployment.tar.gz`,
+      `scp ${packPath}/${packagejson.version}.zip node@${mitosis.target.ip}:${remoteDistPath}/deployment.zip`,
       `ssh node@${mitosis.target.ip} '${[
         `cd ${remoteDistPath}`,
-        'tar -zxf deployment.tar.gz',
+        'unzip deployment.zip',
         '. ~/.nvm/nvm.sh',
         `nvm install ${packagejson.engines.node}`,
         `nvm use ${packagejson.engines.node}`,
