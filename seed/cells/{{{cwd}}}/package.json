@@ -1,14 +1,16 @@
 {
   "scripts": {
-    "deploy-{{{mitosis-name}}}": "angel start remote mitosis {{{mitosis-name}}}",
-    "stop-{{{mitosis-name}}}": "angel start remote apoptosis {{{mitosis-name}}}"
+    "deploy-{{{mitosis-name}}}": "angel cell mitosis {{{mitosis-name}}}",
+    "stop-{{{mitosis-name}}}": "angel cell apoptosis {{{mitosis-name}}}",
+    "status-{{{mitosis-name}}}": "angel cell status {{{mitosis-name}}}",
+    "restart-{{{mitosis-name}}}": "angel cell restart {{{mitosis-name}}}"
   },
   "dependencies": {
     "organic-angel": "^0.3.2",
     "organic-plasma": "^2.1.0",
-    "organic-plasma-channel": "^2.1.1",
     "angelabilities-package-scripts": "^0.1.0",
-    "angelabilities-exec": "^1.0.0"
+    "angelabilities-exec": "^1.0.0",
+    "angelscripts-cell-mitosis": "node-organic/angelscripts-cell-mitosis"
   },
   "devDependencies": {
     "angelscripts-help": "^0.2.0",
