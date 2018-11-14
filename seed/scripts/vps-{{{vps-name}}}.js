@@ -13,7 +13,7 @@ module.exports = function (angel) {
     let rootDNA = await loadRootDNA()
     let vpsIP = rootDNA.vps['{{{vps-name}}}'].ip
     console.log('setup ' + vpsIP)
-    let setupFilePath = 'dna/vps/{{{vps-name}}}/setup.sh'
+    let setupFilePath = 'dna/vps/{{{vps-name}}}.sh'
     await angel.exec(`scp ${setupFilePath} root@${vpsIP}:/home/root/setup.sh`)
     let setupCmds = `ssh root@${vpsIP} '${[
       '/bin/bash /home/root/setup.sh',
@@ -22,18 +22,22 @@ module.exports = function (angel) {
     console.info(setupCmds)
     await angel.exec(setupCmds)
     console.info('installing root cell node-organic/organic-nginx-configurator...')
-    await angel.exec('npx node-organic/organic-nginx-configurator ' + vpsIP + ' ./dna/vps/v9/nginx.conf.ejs')
+    await angel.exec('npx node-organic/organic-nginx-configurator ' + vpsIP)
     console.info('installing root cell node-organic/organic-systemd-configurator...')
-    await angel.exec('npx node-organic/organic-systemd-configurator ' + vpsIP + ' ./dna/vps/v9/systemd.service.ejs')
+    await angel.exec('npx node-organic/organic-systemd-configurator ' + vpsIP)
+    console.info('installing root cell node-organic/organic-flush-legacy-cells...')
+    await angel.exec('npx node-organic/organic-flush-legacy-cells ' + vpsIP)
     console.info('{{{vps-name}}} vps setup done.')
   })
   angel.on('vps {{{vps-name}}} update services', async () => {
     let rootDNA = await loadRootDNA()
     let vpsIP = rootDNA.vps['{{{vps-name}}}'].ip
     console.info('updating root cell node-organic/organic-nginx-configurator...')
-    await angel.exec('npx node-organic/organic-nginx-configurator ' + vpsIP + ' ./dna/vps/v9/nginx.conf.ejs')
+    await angel.exec('npx node-organic/organic-nginx-configurator ' + vpsIP)
     console.info('updating root cell node-organic/organic-systemd-configurator...')
-    await angel.exec('npx node-organic/organic-systemd-configurator ' + vpsIP + ' ./dna/vps/v9/systemd.service.ejs')
+    await angel.exec('npx node-organic/organic-systemd-configurator ' + vpsIP)
+    console.info('installing root cell node-organic/organic-flush-legacy-cells...')
+    await angel.exec('npx node-organic/organic-flush-legacy-cells ' + vpsIP)
   })
   angel.on('vps {{{vps-name}}} restart services', async () => {
     let rootDNA = await loadRootDNA()
@@ -41,6 +45,7 @@ module.exports = function (angel) {
     let reloadCmds = `ssh root@${vpsIP} '${[
       'systemctl restart organic-nginx-configurator',
       'systemctl restart organic-systemd-configurator',
+      'systemctl restart organic-flush-legacy-cells',
     ].join(' && ')}'`
     console.info(reloadCmds)
     await angel.exec(reloadCmds)
