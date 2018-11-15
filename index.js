@@ -24,6 +24,7 @@ const execute = async function ({destDir = process.cwd(), answers} = {}) {
   let cells = getcells(rootDNA.cells)
   for (let i = 0; i < cells.length; i++) {
     if (cells[i].name === resulted_answers['cell-name']) {
+      if (!cells[i].dna.mitosis) continue
       let mitosis = cells[i].dna.mitosis[resulted_answers['mitosis-name']]
       resulted_answers['cwd'] = cells[i].cwd.replace('cells/', '')
       resulted_answers['zygote'] = mitosis.zygote ? 'true' : 'false'
