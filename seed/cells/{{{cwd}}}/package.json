@@ -1,6 +1,10 @@
 {
   "scripts": {
-    "deploy-{{{mitosis-name}}}": "angel cell mitosis {{{mitosis-name}}}",
+    "deploy-{{{mitosis-name}}}-patch": "angel cell mitosis {{{mitosis-name}}} patch",
+    "deploy-{{{mitosis-name}}}-minor": "angel cell mitosis {{{mitosis-name}}} minor",
+    "deploy-{{{mitosis-name}}}-major": "angel cell mitosis {{{mitosis-name}}} major",
+    "deploy-{{{mitosis-name}}}-prerelease": "angel cell mitosis {{{mitosis-name}}} prerelease",
+    "deploy-{{{mitosis-name}}}-current": "angel cell mitosis {{{mitosis-name}}} current",
     "stop-{{{mitosis-name}}}": "angel cell apoptosis {{{mitosis-name}}}",
     "status-{{{mitosis-name}}}": "angel cell status {{{mitosis-name}}}",
     "restart-{{{mitosis-name}}}": "angel cell restart {{{mitosis-name}}}"
@@ -10,7 +14,7 @@
     "organic-plasma": "^2.1.0",
     "angelabilities-package-scripts": "^0.1.0",
     "angelabilities-exec": "^1.0.0",
-    "angelscripts-cell-mitosis": "node-organic/angelscripts-cell-mitosis"
+    "angelscripts-cell-mitosis": "v1.1.0"
   },
   "devDependencies": {
     "angelscripts-help": "^0.2.0",
