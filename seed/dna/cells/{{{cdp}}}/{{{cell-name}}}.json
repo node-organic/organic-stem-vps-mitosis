@@ -8,8 +8,7 @@
         "versionConditions": ["major", "minor", "patch", "prerelease", "build"]
       },
       "zygote": {{{zygote}}},
-      "count": {{{count}}},
-      "notifyChannels": {{{notify-channels}}}
+      "count": {{{count}}}
     }
   }
 }

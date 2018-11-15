@@ -29,12 +29,11 @@ const execute = async function ({destDir = process.cwd(), answers} = {}) {
       resulted_answers['cwd'] = cells[i].cwd.replace('cells/', '')
       resulted_answers['zygote'] = mitosis.zygote ? 'true' : 'false'
       resulted_answers['count'] = mitosis.count
-      resulted_answers['notify-channels'] = mitosis.notifyChannels
       resulted_answers['vps-name'] = mitosis.target.name
       resulted_answers['vps-ip'] = mitosis.target.ip
       resulted_answers['vps-domain'] = mitosis.target.domain
       resulted_answers['cell-mode'] = mitosis.mode
-      resulted_answers['cdp'] = cells[i].dnaBranchPath.replace(/\./g, path.sep)
+      resulted_answers['cdp'] = path.dirname(cells[i].dnaBranchPath.replace(/\./g, path.sep))
       break
     }
   }
@@ -53,13 +52,6 @@ const execute = async function ({destDir = process.cwd(), answers} = {}) {
     if (!resulted_answers['count']) {
       resulted_answers['count'] = await stack.ask('count?', 2)
     }
-  }
-  if (!resulted_answers['notify-channels']) {
-    let defaultChannels = 'nginx, systemd'
-    if (resulted_answers['zygote'] === 'true') {
-      defaultChannels = 'nginx'
-    }
-    resulted_answers['notify-channels'] = (await stack.ask('notify-channels? (comma separated)', defaultChannels)).split(',').map((v) => v.trim())
   }
   resulted_answers = await stack.configure({
     sourceDirs: [path.join(__dirname, 'seed')],
