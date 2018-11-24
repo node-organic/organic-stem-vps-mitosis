@@ -43,3 +43,16 @@ test('stack upgrade', async () => {
     }
   })
 })
+
+test('stack upgrade again', async () => {
+  jest.setTimeout(60 * 1000)
+  let execute = require('../index')
+  await execute({
+    destDir: tempDir,
+    answers: {
+      'cell-name': 'testcell',
+      'mitosis-name': 'prod',
+      'override': true
+    }
+  })
+})

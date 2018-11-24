@@ -1,5 +1,21 @@
 {
   "name": "{{{vps-name}}}",
   "ip": "{{{vps-ip}}}",
-  "domain": "{{{vps-domain}}}"
+  "domain": "{{{vps-domain}}}",
+  "rootCells": [
+    {
+      "source": "node-organic/organic-nginx-configurator",
+      "templatePath": "dna/vps/{{{vps-name}}}/nginx",
+      "serviceName": "organic-nginx-configurator"
+    },
+    {
+      "source": "node-organic/organic-systemd-configurator",
+      "templatePath": "dna/vps/{{{vps-name}}}/systemd",
+      "serviceName": "organic-systemd-configurator"
+    },
+    {
+      "source": "node-organic/organic-flush-legacy-cells",
+      "serviceName": "organic-flush-legacy-cells"
+    }
+  ]
 }

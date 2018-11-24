@@ -9,12 +9,12 @@ $ cd ./myProject
 $ npx node-organic/organic-stem-vps-mitosis-template
 ```
 
-## details
+## commands
 
 ### monorepo level 
 
 * `$ npx angel vps :vpsName setup` script which provisions remote VPS instance
-  * installs:   
+  * installs root cells:   
     * [organic-nginx-configurator](https://github.com/node-organic/organic-nginx-configurator) 
     * [organic-systemd-configurator](https://github.com/node-organic/organic-systemd-configurator)
     * [organic-flush-legacy-cells](https://github.com/node-organic/organic-flush-legacy-cells/network/alerts)
@@ -22,8 +22,22 @@ $ npx node-organic/organic-stem-vps-mitosis-template
 
 ### cell level 
 
+#### via npm
+
+* `$ npm run deploy-{mitosisName}-current`
+* `$ npm run deploy-{mitosisName}-major`
+* `$ npm run deploy-{mitosisName}-minor`
+* `$ npm run deploy-{mitosisName}-patch`
+* `$ npm run deploy-{mitosisName}-prerelease`
+* `$ npm run apoptosis-{mitosisName}`
+* `$ npm run stop-{mitosisName}`
+* `$ npm run status-{mitosisName}`
+* `$ npm run restart-{mitosisName}`
+
+#### via angel
+
 * `$ npx angel cell mitosis :mitosisName :versionChange` script which deploys a version (`major`, `minor`, `patch`, `prerelease`, `build` or `current`) accordingly to its cell mitosis dna
-
 * `$ npx angel cell status :mitosisName` generates report about cell mitosis(es) accordingly to its dna
-
 * `$ npx angel cell apoptosis :mitosisName` script which kills specific completed mitosis
+* `$ npx angel cell stop :mitosisName` 
+* `$ npx angel cell restart :mitosisName`

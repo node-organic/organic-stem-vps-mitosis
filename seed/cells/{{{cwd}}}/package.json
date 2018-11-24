@@ -5,20 +5,20 @@
     "deploy-{{{mitosis-name}}}-major": "angel cell mitosis {{{mitosis-name}}} major",
     "deploy-{{{mitosis-name}}}-prerelease": "angel cell mitosis {{{mitosis-name}}} prerelease",
     "deploy-{{{mitosis-name}}}-current": "angel cell mitosis {{{mitosis-name}}} current",
-    "stop-{{{mitosis-name}}}": "angel cell apoptosis {{{mitosis-name}}}",
+    "apoptosis-{{{mitosis-name}}}": "angel cell apoptosis {{{mitosis-name}}}",
+    "stop-{{{mitosis-name}}}": "angel cell stop {{{mitosis-name}}}",
     "status-{{{mitosis-name}}}": "angel cell status {{{mitosis-name}}}",
     "restart-{{{mitosis-name}}}": "angel cell restart {{{mitosis-name}}}"
   },
   "dependencies": {
     "organic-angel": "^0.3.2",
-    "organic-plasma": "^2.1.0",
     "angelabilities-package-scripts": "^0.1.0",
-    "angelabilities-exec": "^1.0.0",
-    "angelscripts-cell-mitosis": "v1.1.1"
+    "angelscripts-cell-mitosis": "^1.3.0"
   },
   "devDependencies": {
-    "angelscripts-help": "^0.2.0",
-    "prompt-list": "^3.2.0",
-    "git-branch-name": "^1.1.0"
+    "angelscripts-help": "^0.2.0"
+  },
+  "engine": {
+    "node": "8.12.0"
   }
 }
