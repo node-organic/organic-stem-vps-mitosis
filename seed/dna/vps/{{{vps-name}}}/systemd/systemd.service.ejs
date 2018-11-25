@@ -1,5 +1,7 @@
 [Unit]
 Description=<%= name %>
+# uncomment to post to slack channel enabled in /setup.sh
+# OnFailure=on-failure-post-slack@<%= name %>.service
 
 [Service]
 ExecStart=/bin/bash start.sh <%= nodeVersion %> <%= mitosis.mode %> %i
