@@ -39,7 +39,8 @@ test('stack upgrade', async () => {
       'count': 2,
       'notify-channels': ['nginx', 'systemd'],
       'mitosis-name': 'prod',
-      'cell-mode': '_production'
+      'cell-mode': '_production',
+      'runningOn': 'READY'
     }
   })
 })
@@ -51,8 +52,7 @@ test('stack upgrade again', async () => {
     destDir: tempDir,
     answers: {
       'cell-name': 'testcell',
-      'mitosis-name': 'prod',
-      'override': true
+      'mitosis-name': 'prod'
     }
   })
 })

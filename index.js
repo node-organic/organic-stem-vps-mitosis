@@ -57,15 +57,16 @@ const execute = async function ({destDir = process.cwd(), answers} = {}) {
     sourceDirs: [path.join(__dirname, 'seed')],
     answers: resulted_answers
   })
-  let forceOverride = false
-  if (!resulted_answers['override'] && cellFound.dna.mitosis) {
-    resulted_answers['override'] = await stack.ask('override?', 'false')
-  }
   await stack.merge({
     sourceDir: path.join(__dirname, 'seed'),
-    answers: resulted_answers,
-    forceOverride: forceOverride
+    answers: resulted_answers
   })
+  if (resulted_answers['zygote'] !== 'true') {
+    await stack.merge({
+      sourceDir: path.join(__dirname, 'seed-server-cell'),
+      answers: resulted_answers
+    })
+  }
   await stack.updateJSON()
   let cellName = resulted_answers['cell-name']
   console.info(`run npm install on ${cellName}...`)

@@ -1,0 +1,10 @@
+{
+  "build": {
+    "notify-running": {
+      "source": "organic-vps-cell-running-marker",
+      "enabledLocation": "/home/node/deployments/enabled",
+      "runningLocation": "/home/node/deployments/running",
+      "reactOn": "{{{runningOn}}}"
+    }
+  }
+}
