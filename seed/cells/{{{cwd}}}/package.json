@@ -1,19 +1,16 @@
 {
   "scripts": {
-    "deploy-{{{mitosis-name}}}-patch": "angel cell mitosis {{{mitosis-name}}} patch",
-    "deploy-{{{mitosis-name}}}-minor": "angel cell mitosis {{{mitosis-name}}} minor",
-    "deploy-{{{mitosis-name}}}-major": "angel cell mitosis {{{mitosis-name}}} major",
-    "deploy-{{{mitosis-name}}}-prerelease": "angel cell mitosis {{{mitosis-name}}} prerelease",
-    "deploy-{{{mitosis-name}}}-current": "angel cell mitosis {{{mitosis-name}}} current",
-    "apoptosis-{{{mitosis-name}}}": "angel cell apoptosis {{{mitosis-name}}}",
-    "stop-{{{mitosis-name}}}": "angel cell stop {{{mitosis-name}}}",
-    "status-{{{mitosis-name}}}": "angel cell status {{{mitosis-name}}}",
-    "restart-{{{mitosis-name}}}": "angel cell restart {{{mitosis-name}}}"
+    "mitosis-{{{mitosis-name}}}-patch": "angel cell mitosis {{{mitosis-name}}} patch",
+    "mitosis-{{{mitosis-name}}}-minor": "angel cell mitosis {{{mitosis-name}}} minor",
+    "mitosis-{{{mitosis-name}}}-major": "angel cell mitosis {{{mitosis-name}}} major",
+    "mitosis-{{{mitosis-name}}}-prerelease": "angel cell mitosis {{{mitosis-name}}} prerelease",
+    "mitosis-{{{mitosis-name}}}-current": "angel cell mitosis {{{mitosis-name}}} current",
+    "apoptosis-{{{mitosis-name}}}": "angel cell apoptosis {{{mitosis-name}}}"
   },
   "dependencies": {
     "organic-angel": "^0.3.2",
     "angelabilities-package-scripts": "^0.1.0",
-    "angelscripts-cell-mitosis": "^1.3.0"
+    "angelscripts-cell-mitosis": "^1.4.0"
   },
   "devDependencies": {
     "angelscripts-help": "^0.2.0"

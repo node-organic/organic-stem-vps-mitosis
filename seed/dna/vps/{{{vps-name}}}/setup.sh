@@ -1,14 +1,27 @@
 # executed via angel cli at monorepo level `$ angel vps {{{vps-name}}} setup`
 
+# add node user without password
 adduser --disabled-password --gecos "" --home /home/node node
+
+# create node's .ssh folder to contain authorized_keys
 mkdir /home/node/.ssh
 chown -R node:node /home/node/.ssh
+
+# update the system and install basics
 apt-get update
 apt-get -y install git build-essential
+
+# install nvm accessible as node user
 git clone https://github.com/creationix/nvm.git /home/node/.nvm
 cd /home/node/.nvm
 git checkout v0.33.11
 chown -R node:node /home/node/.nvm
+
+# scaffold deployments structure accessible as node user
+mkdir -p /home/node/deployments/cells
+mkdir -p /home/node/deployments/enabled
+mkdir -p /home/node/deployments/running
+chown -R node:node /home/node/deployments
 
 ## installs mongodb 4 ##
 # apt-get -y install apt-transport-https

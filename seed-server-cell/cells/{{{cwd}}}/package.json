@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "organic-vps-cell-running-marker": "node-organic/organic-vps-cell-running-marker"
+    "organic-vps-cell-running-marker": "^1.0.0"
   }
 }
