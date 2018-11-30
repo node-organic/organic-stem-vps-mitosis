@@ -2,4 +2,5 @@
 
 . ~/.nvm/nvm.sh
 nvm use $1
-node index.js $2 $3
+export SIBLING_INDEX=$3
+node index.js $2

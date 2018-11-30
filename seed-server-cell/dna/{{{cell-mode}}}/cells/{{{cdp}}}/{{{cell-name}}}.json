@@ -6,6 +6,7 @@
       "runningLocation": "/home/node/deployments/running",
       "reactOnServer": ["ExpressServer", "ApiRoutesReady"],
       "CELL_MODE": "{{{cell-mode}}}",
+      "index": "{$SIBLING_INDEX}",
       "enabled": true,
       "log": true
     }
